@@ -12,9 +12,9 @@ using System.IO;
 namespace ExampleService.Tests
 {
     [TestFixture]
-    public class MailRu_AutorizationAndSendMail
+    public class MailRu_Autorization
     {
-        public class NunitSetup
+        public class NunitSetupAutorization
         {
             IWebDriver driver;
 
@@ -26,16 +26,16 @@ namespace ExampleService.Tests
 
                 //Creates the ChomeDriver object, Executes tests on Google Chrome
                 driver = new ChromeDriver(path + @"\Drivers\");
+
+                // Make full autorization on mail.ru
+                var autorizationMailru = new MailRuAutorizationPageObjects(driver);
+                autorizationMailru.AutorizationInMailRU("epamtestmail93@mail.ru", "EpamTest185");
             }
 
             [Test, Order(1)]
             public void Authorization_WithCorrectEmailPassword_AuthorizationSuccess()
             {
-                // Make full autorization on mail.ru
-                var autorizationMailru = new MailRuAutorizationPageObjects(driver);
-                autorizationMailru.AutorizationInMailRU("epamtestmail93@mail.ru", "EpamTest185");
-
-                //And success of authorization
+                //Success of authorization
                 Assert.AreEqual("Авторизация", driver.Title);
             }
 
