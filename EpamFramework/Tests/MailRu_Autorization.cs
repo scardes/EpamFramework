@@ -2,8 +2,11 @@ using EpamWebDriver.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using System;
 using System.IO;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
 
 /// <summary>
 /// Selenium test project with two emails 
@@ -21,12 +24,20 @@ namespace ExampleService.Tests
             [OneTimeSetUp]
             public void Setup()
             {
-                //Below code is to get the drivers folder path dynamically.
-                string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-
-                //Creates the ChomeDriver object, Executes tests on Google Chrome
-                driver = new ChromeDriver(path + @"\Drivers\");
-
+                string driverParamTemp = "chrome";
+                
+                switch (driverParamTemp) 
+                {
+                    case "chrome":
+                        new DriverManager().SetUpDriver(new ChromeConfig());
+                        driver = new ChromeDriver();
+                        break;
+                    case "firefox":
+                        new DriverManager().SetUpDriver(new FirefoxConfig());
+                        driver = new FirefoxDriver();
+                        break;
+                }
+                
                 // Make full autorization on mail.ru
                 var autorizationMailru = new MailRuAutorizationPageObjects(driver);
                 autorizationMailru.AutorizationInMailRU("epamtestmail93@mail.ru", "EpamTest185");
