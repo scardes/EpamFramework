@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using EpamFramework.BusinessObjects;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 
@@ -50,19 +51,19 @@ namespace EpamWebDriver.PageObjects
         }
 
         // Make full autorization on mail.ru
-        public void AutorizationInMailRU(string username, string password)
+        public void AutorizationInMailRU(User user)
         {
             GotoMailRU();
             driver.Manage().Window.Maximize();
             //Fill Username(Login) information
             driver.FindElement(NextButton).Click();
-            driver.FindElement(UsernameField).SendKeys(username);
+            driver.FindElement(UsernameField).SendKeys(user.getUsername());
 
             // Go to the next step
             driver.FindElement(NextButton, 10).Click();
 
             //Now fill the password
-            driver.FindElement(PasswordField).SendKeys(password);
+            driver.FindElement(PasswordField).SendKeys(user.getPassword());
             driver.FindElement(SubmitButton).Click();
         }
 

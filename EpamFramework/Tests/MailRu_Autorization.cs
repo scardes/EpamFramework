@@ -1,3 +1,4 @@
+using EpamFramework.BusinessObjects;
 using EpamWebDriver.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -37,10 +38,12 @@ namespace ExampleService.Tests
                         driver = new FirefoxDriver();
                         break;
                 }
-                
+
                 // Make full autorization on mail.ru
-                var autorizationMailru = new MailRuAutorizationPageObjects(driver);
-                autorizationMailru.AutorizationInMailRU("epamtestmail93@mail.ru", "EpamTest185");
+                User testUser = new User("epamtestmail93@mail.ru", "EpamTest185");
+                MailRuAutorizationPageObjects autorizationMailru = new MailRuAutorizationPageObjects(driver);
+
+                autorizationMailru.AutorizationInMailRU(testUser);
             }
 
             [Test, Order(1)]
