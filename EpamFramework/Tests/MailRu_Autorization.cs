@@ -6,18 +6,14 @@ using NUnit.Framework;
 namespace ExampleService.Tests
 {
     [TestFixture]
-    public class MailRu_Autorization 
+    public class MailRu_Autorization : CommonConditions
     {
-        public class MailCorrectAutorization : CommonConditions.NunitSetupAutorization
+        [Test, Order(1)]
+        public void Authorization_WithCorrectEmailPassword_AuthorizationSuccess()
         {
-            
-            [Test, Order(1)]
-            public void Authorization_WithCorrectEmailPassword_AuthorizationSuccess()
-            {
-                //Success of authorization
-                Assert.AreEqual("Авторизация", driver.Title);
-            }
-          
+            //Success of authorization
+            Assert.AreEqual("Авторизация", driver.Title);
         }
+          
     }
 }

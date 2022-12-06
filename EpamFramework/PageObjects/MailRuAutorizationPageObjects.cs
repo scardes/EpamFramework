@@ -24,7 +24,6 @@ namespace EpamWebDriver.PageObjects
             this.driver = driver;
         }
 
-
         //Open mail.ru page
         private void GotoMailRU()
         {

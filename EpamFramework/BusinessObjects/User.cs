@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EpamFramework.BusinessObjects
+﻿namespace EpamFramework.BusinessObjects
 {
     class User
     {
