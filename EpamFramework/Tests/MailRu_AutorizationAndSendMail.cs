@@ -16,22 +16,10 @@ namespace ExampleService.Tests
     [TestFixture]
     public class MailRu_AutorizationAndSendMail
     {
-        public class NunitSetup
+        public class MailAutorizationAndSend : CommonConditions.NunitSetupAutorization
         {
-            IWebDriver driver;
-
             User testUserSuccess = new User("epamtestmail93@mail.ru", "EpamTest185");
             User testUserError = new User("123@mail.ru", "123");
-
-            [OneTimeSetUp]
-            public void Setup()
-            {
-                //Below code is to get the drivers folder path dynamically.
-                string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-
-                //Creates the ChomeDriver object, Executes tests on Google Chrome
-                driver = new ChromeDriver(path + @"\drivers\");
-            }
 
             [Test, Order(1)]
             public void LoadMailInBrowser_ClickSignUp_LoadSuccess()
@@ -89,15 +77,7 @@ namespace ExampleService.Tests
                 MailRuSendMailPageObjects SendMail = new MailRuSendMailPageObjects(driver);
                 SendMail.SendEmailFromMailRU("testepammail@yandex.ru", "Test Letter From mail.ru", "Content of test letter");
             }
-
-            // runs once after all tests finished
-            [OneTimeTearDown]
-            public void Dispose()
-            {
-                // close down the browser
-                driver.Quit();
-                driver.Dispose();
-            }
+        
         }
     }
 }

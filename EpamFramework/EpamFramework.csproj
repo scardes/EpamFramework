@@ -7,7 +7,7 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<RunSettingsFilePath>$(MSBuildProjectDirectory)\dev.runsettings</RunSettingsFilePath>
+		<RunSettingsFilePath>$(MSBuildProjectDirectory)\devChrome.runsettings</RunSettingsFilePath>
 	</PropertyGroup>
 
   <ItemGroup>
