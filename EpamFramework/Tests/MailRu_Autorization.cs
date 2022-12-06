@@ -9,6 +9,7 @@ using System.IO;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
+
 /// <summary>
 /// Selenium test project with two emails 
 /// first email on https://account.mail.ru/
@@ -21,13 +22,17 @@ namespace ExampleService.Tests
         public class NunitSetupAutorization
         {
             IWebDriver driver;
+            public static NUnit.Framework.TestContext CurrentContext { get; }
 
             [OneTimeSetUp]
             public void Setup()
             {
-                string driverParamTemp = "chrome";
+                // The properties are read from the .runsettings file
+                string driverParam = TestContext.Parameters["browser"];
+                string userMailParam = TestContext.Parameters["userMail"];
+                string userPassParam = TestContext.Parameters["userPass"];
                 
-                switch (driverParamTemp) 
+                switch (driverParam) 
                 {
                     case "chrome":
                         new DriverManager().SetUpDriver(new ChromeConfig());
@@ -40,11 +45,12 @@ namespace ExampleService.Tests
                 }
 
                 // Make full autorization on mail.ru
-                User testUser = new User("epamtestmail93@mail.ru", "EpamTest185");
+                User testUser = new User(userMailParam, userPassParam);
                 MailRuAutorizationPageObjects autorizationMailru = new MailRuAutorizationPageObjects(driver);
 
                 autorizationMailru.AutorizationInMailRU(testUser);
             }
+
 
             [Test, Order(1)]
             public void Authorization_WithCorrectEmailPassword_AuthorizationSuccess()
@@ -53,6 +59,19 @@ namespace ExampleService.Tests
                 Assert.AreEqual("Авторизация", driver.Title);
             }
 
+            [Test, Order(2)]
+            public void TestRunsettingParameters()
+            {
+                //Arrange
+                string expectedUrl = "chrome";
+
+                // Act
+                // The properties are read from the .runsettings file
+                string actualUrl = TestContext.Parameters["browser"];
+
+                // Assert
+                Assert.AreEqual(expectedUrl, actualUrl);
+            }
 
             // runs once after all tests finished
             [OneTimeTearDown]
