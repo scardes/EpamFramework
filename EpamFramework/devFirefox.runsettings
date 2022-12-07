@@ -1,12 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RunSettings>
-	
+	<!-- Configurations that affect the Test Framework -->
+	<RunConfiguration>
+		<!-- Path relative to directory that contains .runsettings file-->
+		<ResultsDirectory>.\TestResults</ResultsDirectory>
+
+		<!-- Path to Test Adapters -->
+		<TestAdaptersPaths>%SystemDrive%\Temp\foo;%SystemDrive%\Temp\bar</TestAdaptersPaths>
+
+		<!-- TestSessionTimeout was introduced in Visual Studio 2017 version 15.5 -->
+		<!-- Specify timeout in milliseconds. A valid value should be greater than 0 -->
+		<TestSessionTimeout>10000</TestSessionTimeout>
+
+		<!-- true or false -->
+		<!-- Value that specifies the exit code when no tests are discovered -->
+		<TreatNoTestsAsError>true</TreatNoTestsAsError>
+	</RunConfiguration>
+
 	<!-- Parameters used by tests at run time -->
 	<TestRunParameters>
 		<Parameter name="browser" value="firefox" />
 		<Parameter name="userMail" value="epamtestmail93@mail.ru" />
 		<Parameter name="userPass" value="EpamTest185" />
 	</TestRunParameters>
+
+	<!-- VideoRecorder -->
+	<DataCollector uri="datacollector://microsoft/VideoRecorder/1.0" assemblyQualifiedName="Microsoft.VisualStudio.TestTools.DataCollection.VideoRecorder.VideoRecorderDataCollector, Microsoft.VisualStudio.TestTools.DataCollection.VideoRecorder, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" friendlyName="Screen and Voice Recorder">
+		<!--Video data collector was introduced in Visual Studio 2017 version 15.5 -->
+		<Configuration>
+			<!-- Set "sendRecordedMediaForPassedTestCase" to "false" to add video attachments to failed tests only -->
+			<MediaRecorder sendRecordedMediaForPassedTestCase="true"  xmlns="">
+				​
+				<ScreenCaptureVideo bitRate="512" frameRate="2" quality="20" />​
+			</MediaRecorder>​
+		</Configuration>
+	</DataCollector>
 
 	<!-- Configuration for loggers -->
 	<LoggerRunSettings>
