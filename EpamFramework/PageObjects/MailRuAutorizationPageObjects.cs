@@ -1,11 +1,12 @@
 ﻿using EpamFramework.BusinessObjects;
+using EpamFramework.PageObjects;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 
 namespace EpamWebDriver.PageObjects
 {
-    class MailRuAutorizationPageObjects
+    class MailRuAutorizationPageObjects 
     {
         private IWebDriver driver;
 
